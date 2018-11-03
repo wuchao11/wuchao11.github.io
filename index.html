@@ -190,6 +190,26 @@
         </li>
       
         
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives/" rel="section">
             
@@ -218,6 +238,130 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://justcodingwc.top/2018/11/03/sql语句/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuchao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="codingwc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/03/sql语句/" itemprop="url">sql语句</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-03T15:16:39+08:00">
+                2018-11-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>​            </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//结构化数据：那些按照一定规律和顺序，通常指数据库 本来晚上想写一下hive的 </span></span><br><span class="line"><span class="comment">//没想到今天把昨天的代码敲了两遍，还是提前敲完了，还是先写一下sql吧。</span></span><br><span class="line"><span class="comment">//数据库备份 mysqldump -u用户名 -p密码 数据库名&gt;导出文件路径   </span></span><br><span class="line"><span class="comment">//数据库还是多备份点，要是真删库了，能跑多远跑多远</span></span><br></pre></td></tr></table></figure>
+<h3 id="DML、DDL、DCL"><a href="#DML、DDL、DCL" class="headerlink" title="DML、DDL、DCL"></a>DML、DDL、DCL</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DML:<span class="function">database manager <span class="title">language</span><span class="params">(三种对数据库事务性的操作:增删改表记录)</span></span></span><br><span class="line"><span class="function">- 1.insert insert into <span class="title">table_name</span><span class="params">(列名，列名)</span> <span class="title">values</span> <span class="params">(列值，列值)</span></span></span><br><span class="line"><span class="function">- 2.update update table_name set 列名</span>=列值（，列名=列值） where (条件判断)</span><br><span class="line">- <span class="number">3</span>.<span class="function">delete delete from table_name <span class="title">where</span> <span class="params">(条件判断)</span></span></span><br><span class="line"><span class="function">DDL：database define <span class="title">language</span><span class="params">(对数据库、表增删改的操作)</span>DML是对表数据的操作</span></span><br><span class="line"><span class="function">创建库表</span></span><br><span class="line"><span class="function">- 1.create table <span class="title">table_name</span><span class="params">(name varchar(<span class="number">10</span>)</span>,age <span class="keyword">int</span>)</span></span><br><span class="line"><span class="function">- 2.create database database_name </span></span><br><span class="line"><span class="function">删除库表</span></span><br><span class="line"><span class="function">- 1.drop database database_name</span></span><br><span class="line"><span class="function">- 2.drop table_name</span></span><br><span class="line"><span class="function">更改库表</span></span><br><span class="line"><span class="function">- 1.alter database database_name charset set <span class="title">utf8</span><span class="params">(改数据库编码)</span></span></span><br><span class="line"><span class="function">- 2.alter table table_name <span class="title">add</span> <span class="params">(列名 列类型)</span>/drop 列名（增删列）</span></span><br><span class="line"><span class="function">DCL：database controller <span class="title">language</span> <span class="params">(数据库控制语言：创建用户、给用户授权或撤销权限)</span></span></span><br><span class="line"><span class="function">- 1.grant all on database_name.* to 用户名@<span class="title">ip</span><span class="params">(all:授予所有权限)</span></span></span><br><span class="line"><span class="function">- 2.revoke create,delete on database_name.* from 用户名@ip 撤销用户的create、delete权限</span></span><br><span class="line"><span class="function">- 3.create user 用户名@"%" identified by '密码'	（创建用户，%代表任意ip地址）</span></span><br></pre></td></tr></table></figure>
+<h3 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//说实在话 布置的那100道题目是我第二次这么长时间写sql </span></span><br><span class="line"><span class="comment">//感觉sql并不难，关键是得静下心来一步一步分析下来，从会做的开始做，剩下的慢慢都能做的来</span></span><br><span class="line">- <span class="number">1</span>.DQL关键字优先级</span><br><span class="line">select &gt; from &gt; where &gt; group by &gt; having &gt; order by &gt; limit</span><br><span class="line">join:笛卡尔积 类似于两个嵌套循环，表中数据两两组合一条数据 </span><br><span class="line">on：关联查询中的条件判断</span><br><span class="line">left join:左表为主表</span><br><span class="line">union:合并表（匹配不上的字段直接删除）</span><br><span class="line">group by:将符合条件的数据合并成一组 实际上用键值对存储最多一组的分组条件和的个数</span><br><span class="line">where:查询中的条件判断</span><br><span class="line">having:查询后的结果的条件判断</span><br><span class="line">order by:排序 asc(默认：升序，随着序列的上升而上升) desc 降序</span><br><span class="line">limit:限制 limit <span class="number">4</span>,<span class="number">3</span> 从第<span class="number">5</span>行开始截取三条数据</span><br></pre></td></tr></table></figure>
+<h3 id="函数部分"><a href="#函数部分" class="headerlink" title="函数部分"></a>函数部分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//聚合函数什么的不想写了，想偷会懒</span></span><br><span class="line"><span class="comment">//其他的函数也不太熟 这里就先搁置了</span></span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -305,13 +449,13 @@
           
             <h2 id="萧伯纳：计算机除了答案什么都没有。而我就是追求答案的人"><a href="#萧伯纳：计算机除了答案什么都没有。而我就是追求答案的人" class="headerlink" title="萧伯纳：计算机除了答案什么都没有。而我就是追求答案的人"></a>萧伯纳：计算机除了答案什么都没有。而我就是追求答案的人</h2><h3 id="scala语言"><a href="#scala语言" class="headerlink" title="scala语言"></a>scala语言</h3><p>​    scala是一门多范式的编程语言，多范式也就是说有很多的编程规范。设计初衷是实现可伸缩的语言（写的太多比较详细，代码容易阅读，对于熟练地开发者来说写得少可以减少工作量），集成了函数式编程（惰性计算、递归、高阶函数：作用简化编程）与面向对象编程（本质是以建立模型体现出来的抽象思维过程和面向对象的方法。模型是用来反应现实世界事物的特征）。object在大陆的翻译为对象，因此很多程序员开玩笑没对象就new一个吧，object在台湾和香港翻译为物件，泛指世上的一切事物。scala运行于java虚拟机，静态编译（将静态库需要调用的部分中的部分提取出来，链接到文件中，消耗资源多），且兼容java代码。博主开发工具是IDEA（英文单词全部大写，要么是专有名词，要么是单词缩写，列入IT,Internet technology）</p>
 <h3 id="声明变量"><a href="#声明变量" class="headerlink" title="声明变量"></a>声明变量</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> i = <span class="number">1</span>(不可变)</span><br><span class="line"><span class="keyword">var</span> s = <span class="string">"hello"</span>(可变)</span><br></pre></td></tr></table></figure>
-<h3 id="常用类型"><a href="#常用类型" class="headerlink" title="常用类型"></a>常用类型</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Byte</span>、<span class="type">Char</span>、<span class="type">Short</span>、<span class="type">Int</span>、<span class="type">Long</span>、<span class="type">Float</span>、<span class="type">Double</span> 与java基本数据类型所占字节大小相同 一个字节<span class="number">8</span>位（<span class="number">2</span>的<span class="number">8</span>次方），取值范围也能计算出来</span><br></pre></td></tr></table></figure>
+<h3 id="常用类型"><a href="#常用类型" class="headerlink" title="常用类型"></a>常用类型</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Byte、Char、Short、Int、Long、Float、Double 与java基本数据类型所占字节大小相同 </span></span><br><span class="line"><span class="comment">//一个字节8位（2的8次方），取值范围也能计算出来</span></span><br></pre></td></tr></table></figure>
 <h3 id="条件表达式"><a href="#条件表达式" class="headerlink" title="条件表达式"></a>条件表达式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> y = <span class="keyword">if</span> (x &gt; <span class="number">0</span>) <span class="number">1</span> <span class="keyword">else</span> <span class="number">-1</span></span><br><span class="line"><span class="keyword">val</span> z = <span class="keyword">if</span> (x &gt; <span class="number">1</span>) <span class="number">1</span> <span class="keyword">else</span> <span class="string">"error"</span> 不像java对类型的限制这么严格</span><br></pre></td></tr></table></figure>
 <h3 id="块表达式"><a href="#块表达式" class="headerlink" title="块表达式"></a>块表达式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> result = &#123;</span><br><span class="line"> <span class="number">5</span>  <span class="comment">//块中最后一个表达式的值</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i &lt;- 表达式/数组/集合)</span><br><span class="line"><span class="keyword">for</span> (i &lt;- <span class="number">1</span> to <span class="number">10</span>) <span class="keyword">yield</span> i * <span class="number">10</span></span><br><span class="line"><span class="keyword">for</span> (i &lt;- arr)</span><br></pre></td></tr></table></figure>
 <h3 id="定义方法（命令式编程更关心解决问题的步骤）"><a href="#定义方法（命令式编程更关心解决问题的步骤）" class="headerlink" title="定义方法（命令式编程更关心解决问题的步骤）"></a>定义方法（命令式编程更关心解决问题的步骤）</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">m2</span> </span>(x:<span class="type">Int</span>):<span class="type">Int</span>=&#123;  <span class="comment">//递归函数必须给返回值</span></span><br><span class="line">    <span class="keyword">if</span>(x&lt;<span class="number">1</span>) <span class="number">1</span></span><br><span class="line">    <span class="keyword">else</span> m2(x<span class="number">-1</span>)*x</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="定义函数（函数式编程更关心演算结果）"><a href="#定义函数（函数式编程更关心演算结果）" class="headerlink" title="定义函数（函数式编程更关心演算结果）"></a>定义函数（函数式编程更关心演算结果）</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">val</span> f1 = (x:<span class="type">Int</span>,y:<span class="type">Int</span>)=&gt;x+y  <span class="comment">//函数对象有apply、curried、toString、tuple</span></span><br><span class="line"><span class="comment">//如果想把方法转换成一个函数，可以用方法名跟上下划线的方式</span></span><br></pre></td></tr></table></figure>
-<h3 id="定义数组、映射、元组"><a href="#定义数组、映射、元组" class="headerlink" title="定义数组、映射、元组"></a>定义数组、映射、元组</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用来操作数据除了常用类型之外scala还有这些以及集合。</span></span><br><span class="line"><span class="keyword">val</span> arr = <span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="keyword">val</span> arr = <span class="type">ArrayBuffer</span>[<span class="type">T</span>]() <span class="comment">//import scala.collection.mutable.ArrayBuffer</span></span><br><span class="line">println(arr.toBuffer) <span class="comment">//直接打印打印数组的hash值（hash函数之后得出的地址值，hash函数近似于编码）</span></span><br><span class="line">arr += (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) arr ++= <span class="type">ArrayBuffer</span>(<span class="number">7</span>,<span class="number">8</span>) <span class="comment">//追加 </span></span><br><span class="line">arr.insert(<span class="number">0</span>,<span class="number">-1</span>) arr.remove(<span class="number">0</span>) <span class="comment">//从某个位置插入</span></span><br><span class="line">数组常用算法 arr.sorted 升序  arr.sum arr.max</span><br><span class="line">映射：<span class="keyword">val</span> map=<span class="type">Map</span>((键，值),(键，值),(键，值)....)</span><br><span class="line">获取键= map变量名.keys /map变量名.keySet</span><br><span class="line">获取值= map变量名(键) map变量名.getOrElse(<span class="string">"suke"</span>,<span class="number">0</span>) </span><br><span class="line">增加：+=</span><br><span class="line">删减：-=/map变量名.remove</span><br><span class="line">遍历map方法：</span><br><span class="line"><span class="keyword">for</span>(x&lt;- user.keys) println(x+<span class="string">" -&gt; "</span>+user(x))</span><br><span class="line"><span class="keyword">for</span>((x,y) &lt;- user) println(x+<span class="string">" -&gt; "</span>+y)</span><br><span class="line">user.foreach&#123;<span class="keyword">case</span> (x,y) =&gt; println(x+<span class="string">" -&gt; "</span>+y)&#125;</span><br><span class="line"><span class="comment">//import scala.collection.mutable/immutable.Map</span></span><br><span class="line">元组：<span class="keyword">val</span> t = (<span class="string">"hadoop"</span>,<span class="number">3.14</span>,<span class="number">5</span>) <span class="comment">//下标从1开始 可以调用toMap转成map</span></span><br></pre></td></tr></table></figure>
+<h3 id="定义数组、映射、元组"><a href="#定义数组、映射、元组" class="headerlink" title="定义数组、映射、元组"></a>定义数组、映射、元组</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//用来操作数据除了常用类型之外scala还有这些以及集合。</span></span><br><span class="line"><span class="keyword">val</span> arr = <span class="type">Array</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="keyword">val</span> arr = <span class="type">ArrayBuffer</span>[<span class="type">T</span>]() <span class="comment">//import scala.collection.mutable.ArrayBuffer</span></span><br><span class="line">println(arr.toBuffer) <span class="comment">//直接打印打印数组的hash值（hash函数之后得出的地址值）</span></span><br><span class="line">arr += (<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) arr ++= <span class="type">ArrayBuffer</span>(<span class="number">7</span>,<span class="number">8</span>) <span class="comment">//追加 </span></span><br><span class="line">arr.insert(<span class="number">0</span>,<span class="number">-1</span>) arr.remove(<span class="number">0</span>) <span class="comment">//从某个位置插入</span></span><br><span class="line">数组常用算法 arr.sorted 升序  arr.sum arr.max</span><br><span class="line">映射：<span class="keyword">val</span> map=<span class="type">Map</span>((键，值),(键，值),(键，值)....)</span><br><span class="line">获取键= map变量名.keys /map变量名.keySet</span><br><span class="line">获取值= map变量名(键) map变量名.getOrElse(<span class="string">"suke"</span>,<span class="number">0</span>) </span><br><span class="line">增加：+=</span><br><span class="line">删减：-=/map变量名.remove</span><br><span class="line">遍历map方法：</span><br><span class="line"><span class="keyword">for</span>(x&lt;- user.keys) println(x+<span class="string">" -&gt; "</span>+user(x))</span><br><span class="line"><span class="keyword">for</span>((x,y) &lt;- user) println(x+<span class="string">" -&gt; "</span>+y)</span><br><span class="line">user.foreach&#123;<span class="keyword">case</span> (x,y) =&gt; println(x+<span class="string">" -&gt; "</span>+y)&#125;</span><br><span class="line"><span class="comment">//import scala.collection.mutable/immutable.Map</span></span><br><span class="line">元组：<span class="keyword">val</span> t = (<span class="string">"hadoop"</span>,<span class="number">3.14</span>,<span class="number">5</span>) <span class="comment">//下标从1开始 可以调用toMap转成map</span></span><br></pre></td></tr></table></figure>
 <h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> scala.collection.immutable/mutable._ (可变和不可变序列)</span><br><span class="line"><span class="keyword">val</span> list0 = <span class="type">ListBuffer</span>[<span class="type">Int</span>](<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line"><span class="keyword">val</span> list1 = <span class="type">List</span>(<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>) </span><br><span class="line"><span class="keyword">val</span> other_lst=<span class="number">2</span>::<span class="type">Nil</span> <span class="comment">//:: 操作符是右结合的</span></span><br><span class="line">list.remove/-= <span class="comment">//删 </span></span><br><span class="line">list.add/+= <span class="comment">//增 </span></span><br><span class="line"><span class="keyword">import</span> scala.collection.immutable/mutable._</span><br><span class="line"><span class="keyword">val</span> set1=<span class="keyword">new</span> <span class="type">HashSet</span>[<span class="type">Int</span>]()</span><br><span class="line">set.add/+=<span class="comment">//增</span></span><br><span class="line">set.remove/+=<span class="comment">//删</span></span><br></pre></td></tr></table></figure>
 <h3 id="类、对象、继承、特质"><a href="#类、对象、继承、特质" class="headerlink" title="类、对象、继承、特质"></a>类、对象、继承、特质</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Scala中的每个类都有主构造器，主构造器的参数直接放置类名后面，与类交织在一起。</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Student</span>(<span class="params">val name:<span class="type">String</span>,var age:<span class="type">Int</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//主构造器会执行类定义的所有语句</span></span><br><span class="line">  println(<span class="string">"执行主构造器"</span>)</span><br><span class="line">  <span class="keyword">private</span>  <span class="keyword">var</span> gender=<span class="string">"male"</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">this</span></span>(name:<span class="type">String</span>,age:<span class="type">Int</span>,gender:<span class="type">String</span>)&#123;</span><br><span class="line">    <span class="comment">//每个辅助构造器执行必须以主构造器或者其他辅助构造器的调用开始</span></span><br><span class="line">    <span class="keyword">this</span>(name,age)</span><br><span class="line">    println(<span class="string">"执行辅助构造器"</span>)</span><br><span class="line">    <span class="keyword">this</span>.gender=gender</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="class"><span class="keyword">object</span> <span class="title">相当于</span> <span class="title">class</span> <span class="title">的单个实例，通常在里面放一些静态的</span> <span class="title">field</span> <span class="title">或者</span> <span class="title">method</span></span>:</span><br><span class="line"><span class="number">1.</span>存放工具方法</span><br><span class="line"><span class="number">2.</span>高效共享单个不可变的实例</span><br><span class="line"><span class="number">3.</span>单例模式</span><br><span class="line">伴生对象：可以互相访问</span><br></pre></td></tr></table></figure>
 <h3 id="trait"><a href="#trait" class="headerlink" title="trait"></a>trait</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">trait</span> <span class="title">MakeFriendsTrait</span> </span>&#123;  <span class="comment">//与java接口相似</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">makeFriends</span></span>(c: <span class="type">Children</span>): <span class="type">Unit</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -321,7 +465,7 @@
 <h3 id="Actor"><a href="#Actor" class="headerlink" title="Actor"></a>Actor</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//类似于rpc框架和socket编程的结合</span></span><br><span class="line"><span class="comment">//需要样例匹配和样例类</span></span><br></pre></td></tr></table></figure>
 <h3 id="高阶函数"><a href="#高阶函数" class="headerlink" title="高阶函数"></a>高阶函数</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//函数可以作为值传递、可以没有函数名 函数的颗粒化（柯里化）：分拆函数为多个输入函数</span></span><br><span class="line"><span class="comment">//闭包：闭包是一个函数，返回值依赖于声明在函数外部的一个或多个变量。</span></span><br><span class="line"> <span class="keyword">val</span> add=(x:<span class="type">Int</span>)=&gt;&#123;</span><br><span class="line"> 	x+y<span class="comment">//y外部变量</span></span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
 <h3 id="隐式转换"><a href="#隐式转换" class="headerlink" title="隐式转换"></a>隐式转换</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//所有的隐式值和隐式方法必须放到object</span></span><br><span class="line"><span class="comment">//对象调用不存在的方法和成员，转换为已知的方法和成员（包括类型）</span></span><br><span class="line"><span class="comment">//同一类型的隐式值只允许出现一次，否则会报错</span></span><br><span class="line"><span class="comment">//使用import导入</span></span><br></pre></td></tr></table></figure>
-<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//明天开始更hive 头一回写这个 以后可能会写心情博客    </span></span><br><span class="line"><span class="comment">//人世间的悲欢并不相同，我只是觉得有些吵闹也许以后会更其他博客，例如对生活对名人以及书本的一些解读。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//明天开始更hive 头一回写这个 以后可能会写心情博客    </span></span><br><span class="line"><span class="comment">//人世间的悲欢并不想通，我只是觉得有些吵闹</span></span><br><span class="line"><span class="comment">//也许以后会更其他博客，例如对生活对名人以及书本的一些解读</span></span><br></pre></td></tr></table></figure>
 
           
         
@@ -441,7 +585,8 @@
       
         
           
-            <h2 id="technical-bolg-or-life-bolg"><a href="#technical-bolg-or-life-bolg" class="headerlink" title="technical bolg or life bolg"></a>technical bolg or life bolg</h2><p>  拖了好久，说了要写博客，一路磕磕绊绊，终于要开始了。不知道能否坚持下去。不说了，说多了做不到都是空的，骗得了自己骗不了别人。</p>
+            <h3 id="technical-bolg-or-life-bolg"><a href="#technical-bolg-or-life-bolg" class="headerlink" title="technical bolg or life bolg"></a>technical bolg or life bolg</h3><pre><code>拖了好久，说了要写博客，一路磕磕绊绊，终于要开始了。不知道能否坚持下去。
+</code></pre><p>不说了，说多了做不到都是空的，骗得了自己骗不了别人。</p>
 
           
         
@@ -523,7 +668,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -536,7 +681,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">2</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
