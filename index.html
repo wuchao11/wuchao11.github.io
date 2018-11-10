@@ -252,6 +252,133 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://justcodingwc.top/2018/11/07/hive/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="wuchao">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="codingwc's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/11/07/hive/" itemprop="url">hive</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-07T08:32:59+08:00">
+                2018-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="hive是什么"><a href="#hive是什么" class="headerlink" title="hive是什么"></a>hive是什么</h3><p>​    </p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">hive是基于<span class="type">Hadoop</span>的一个数据仓库工具，可以将结构化的数据文件映射为一张数据库表，</span><br><span class="line">并提供简单的sql查询功能，可以将sql语句转换为<span class="type">MapReduce</span>任务进行运行。 </span><br><span class="line">hive其实就是一个实时在线的分析平台（<span class="type">OLAP</span>）的查询工具,与mysql的区别在于：</span><br><span class="line">hive的数据存储在hdfs，查询延迟低，适合大批量 数据的处理。hadoop生态圈中，</span><br><span class="line">hdfs用于存储数据，mapreduce用于分析数据，hive则是内置了mapreduce的一个查询工具。</span><br><span class="line">很多新技术入门其实不难，不要认为一个新技术就怎么高大上了，历史告诉我们只有少数人创新</span><br><span class="line">大部分跟着重复造轮子，跟着前人脚步走，这还不简单么。</span><br></pre></td></tr></table></figure>
+<h3 id="数据仓库分层架构"><a href="#数据仓库分层架构" class="headerlink" title="数据仓库分层架构"></a>数据仓库分层架构</h3><p><img src="/2018/11/07/hive/数据仓库架构.png" alt="数据仓库架构"></p>
+<figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">贴源层：源数据的抽取与转换在这里进行</span><br><span class="line"></span><br><span class="line">数据仓库层：hive工作的地方，数据的清洗在这里进行</span><br><span class="line"></span><br><span class="line">数据应用：生成页面展示数据</span><br><span class="line"></span><br><span class="line">不管是网络模型还是框架都有明确的分层机制：好处是减少耦合性，分工明确，</span><br><span class="line">使繁琐的业务简单化，产生错误也能尽快定位错误位置。`</span><br></pre></td></tr></table></figure>
+<h3 id="hive的数据表"><a href="#hive的数据表" class="headerlink" title="hive的数据表"></a>hive的数据表</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">hive的数据表是一个映射表，所谓映射，来自于数学方面中的影射或映射，指两个元素存在相应的关系。例如一对一、一对多、多对一。hive表映射的是hdfs中</span><br><span class="line">hive的元数据（表的结构、映射、权限等信息）存储在mysql/derby中，表数据存在hdfs中</span><br><span class="line">管理表:内部表</span><br><span class="line">外部表：create external table techer (t_id string,t_name string) row format delimited fields terminated by '\t' location '/scoredatas'</span><br><span class="line">数据来源：数据来自于hdfs的外部加载。可指定hive中表数据在hdfs存储的位置</span><br><span class="line">分区表：分区指定的字段其实会加入表中，按该字段分文件夹存储</span><br><span class="line">create table score(s_id string,c_id string, s_score int) partitioned by (month string) row format delimited fields terminated by '\t';  <span class="comment">//partition (month='201806')加载数据得指定分区</span></span><br><span class="line">分桶表：具有排序的功能，根据hash算法分成不同的小文件</span><br><span class="line">create table course (c_id string,c_name string,t_id string) clustered by(c_id) into <span class="number">3</span> buckets row format delimited fields terminated by '\t';</span><br><span class="line">分桶表加载数据只能用overwrite:</span><br><span class="line">insert overwrite table course select * from course_common cluster by(c_id);</span><br></pre></td></tr></table></figure>
+<h3 id="hive的导入导出"><a href="#hive的导入导出" class="headerlink" title="hive的导入导出"></a>hive的导入导出</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">hive从本地加载并覆盖数据：</span><br><span class="line">load data local inpath '/export/servers/hivedatas/student.csv' overwrite  into table student;</span><br><span class="line">从hdfs加载数据：</span><br><span class="line">load data inpath '/hivedatas/techer.csv' into table techer;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">hive导出到本地：</span><br><span class="line">insert overwrite local directory '/export/servers/exporthive' select * from score;</span><br><span class="line">结构化数据导出到本地：</span><br><span class="line">insert overwrite local directory '/export/servers/exporthive' row format delimited fields terminated by '\t' collection items terminated by '#' select * from student;</span><br><span class="line">hive shell导出到本地：</span><br><span class="line">bin/hive -e <span class="string">"select * from myhive.score;"</span> &gt; /export/servers/exporthive/score.txt</span><br><span class="line">hdfs导出hive表文件到本地：</span><br><span class="line">dfs -get /export/servers/exporthive/<span class="number">000000</span>_0 /export/servers/exporthive/local.txt;</span><br><span class="line">导出到hdfs:</span><br><span class="line">insert overwrite directory '/export/servers/exporthive' row format delimited fields terminated by '\t' collection items terminated by '#' select * from score;</span><br><span class="line">export导出到hdfs:</span><br><span class="line">export table score to '/export/exporthive/score';</span><br><span class="line"><span class="comment">//set mapreduce.job.reduces=3</span></span><br><span class="line"><span class="comment">//查询结果导入本地insert overwrite local directory '/export/servers/hivedatas/sort' select * from score sort by s_score;</span></span><br><span class="line"><span class="comment">//分布式并行计算框架mapreduce需要多次网络传输，采取压缩方式能减少传输数据量</span></span><br><span class="line"><span class="comment">//开启map中间输出压缩set hive.exec.compress.intermediate=true</span></span><br><span class="line"><span class="comment">//开启map输出压缩mapreduce.map.output.compress=true;</span></span><br><span class="line"><span class="comment">//设置压缩方式（还有reduce和最终输出压缩这里就不写了）set mapreduce.map.output.compress.codec= org.apache.hadoop.io.compress.SnappyCodec</span></span><br></pre></td></tr></table></figure>
+<h3 id="hive的存储格式"><a href="#hive的存储格式" class="headerlink" title="hive的存储格式"></a>hive的存储格式</h3><figure class="highlight scala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Text</span>，<span class="type">SequenceFile</span>，<span class="type">ParquetFile</span>（二进制存储），<span class="type">ORC</span>（相当于数据包，把数据封装）</span><br><span class="line"><span class="comment">//后两种为列式存储  行式存储要读完自己部分的数据务必要读到其他不相干的数据</span></span><br></pre></td></tr></table></figure>
+<h3 id="hive的优化"><a href="#hive的优化" class="headerlink" title="hive的优化"></a>hive的优化</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">1.Fetch抓取(避免mapreduce),也可以开启本地模式的mapreduce,单进程，一个人mr任务组</span><br><span class="line">2.表优化（多表联查加载顺序从左至右，尽量把大表放在后面加载。减少网络传输）</span><br><span class="line">3.数据倾斜:数据在mapreduce中分布不均。</span><br><span class="line">小文件合并，减少map</span><br><span class="line">单个文件数据量大，增加map</span><br><span class="line">调整reduce数</span><br><span class="line">4.设置并行执行</span><br><span class="line">set hive.exec.parallel=true;              </span><br><span class="line">set hive.exec.parallel.thread.number=16;</span><br><span class="line">5.严格模式</span><br><span class="line">防止好人干坏事</span><br><span class="line">6.jvm重用</span><br><span class="line">jvm的子类实例</span><br><span class="line">7.推测执行</span><br><span class="line">给出一个任务的替代方案，运行情况优则替换</span><br><span class="line">8.压缩</span><br><span class="line">减少网络传输</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://justcodingwc.top/2018/11/03/sql语句/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
@@ -324,10 +451,11 @@
         
           
             <p>​            </p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//结构化数据：那些按照一定规律和顺序，通常指数据库 本来晚上想写一下hive的 </span></span><br><span class="line"><span class="comment">//没想到今天把昨天的代码敲了两遍，还是提前敲完了，还是先写一下sql吧。</span></span><br><span class="line"><span class="comment">//数据库备份 mysqldump -u用户名 -p密码 数据库名&gt;导出文件路径   </span></span><br><span class="line"><span class="comment">//数据库还是多备份点，要是真删库了，能跑多远跑多远</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//结构化数据：那些按照一定规律和顺序排列的数据的数据，通常指数据库 本来晚上想写一下hive的 </span></span><br><span class="line"><span class="comment">//没想到今天把昨天的代码敲了两遍，还是提前敲完了，还是先写一下sql吧。</span></span><br><span class="line"><span class="comment">//数据库备份 mysqldump -u用户名 -p密码 数据库名&gt;导出文件路径   </span></span><br><span class="line"><span class="comment">//数据库还是多备份点，要是真删库了，能跑多远跑多远</span></span><br></pre></td></tr></table></figure>
 <h3 id="DML、DDL、DCL"><a href="#DML、DDL、DCL" class="headerlink" title="DML、DDL、DCL"></a>DML、DDL、DCL</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">DML:<span class="function">database manager <span class="title">language</span><span class="params">(三种对数据库事务性的操作:增删改表记录)</span></span></span><br><span class="line"><span class="function">- 1.insert insert into <span class="title">table_name</span><span class="params">(列名，列名)</span> <span class="title">values</span> <span class="params">(列值，列值)</span></span></span><br><span class="line"><span class="function">- 2.update update table_name set 列名</span>=列值（，列名=列值） where (条件判断)</span><br><span class="line">- <span class="number">3</span>.<span class="function">delete delete from table_name <span class="title">where</span> <span class="params">(条件判断)</span></span></span><br><span class="line"><span class="function">DDL：database define <span class="title">language</span><span class="params">(对数据库、表增删改的操作)</span>DML是对表数据的操作</span></span><br><span class="line"><span class="function">创建库表</span></span><br><span class="line"><span class="function">- 1.create table <span class="title">table_name</span><span class="params">(name varchar(<span class="number">10</span>)</span>,age <span class="keyword">int</span>)</span></span><br><span class="line"><span class="function">- 2.create database database_name </span></span><br><span class="line"><span class="function">删除库表</span></span><br><span class="line"><span class="function">- 1.drop database database_name</span></span><br><span class="line"><span class="function">- 2.drop table_name</span></span><br><span class="line"><span class="function">更改库表</span></span><br><span class="line"><span class="function">- 1.alter database database_name charset set <span class="title">utf8</span><span class="params">(改数据库编码)</span></span></span><br><span class="line"><span class="function">- 2.alter table table_name <span class="title">add</span> <span class="params">(列名 列类型)</span>/drop 列名（增删列）</span></span><br><span class="line"><span class="function">DCL：database controller <span class="title">language</span> <span class="params">(数据库控制语言：创建用户、给用户授权或撤销权限)</span></span></span><br><span class="line"><span class="function">- 1.grant all on database_name.* to 用户名@<span class="title">ip</span><span class="params">(all:授予所有权限)</span></span></span><br><span class="line"><span class="function">- 2.revoke create,delete on database_name.* from 用户名@ip 撤销用户的create、delete权限</span></span><br><span class="line"><span class="function">- 3.create user 用户名@"%" identified by '密码'	（创建用户，%代表任意ip地址）</span></span><br></pre></td></tr></table></figure>
 <h3 id="DQL"><a href="#DQL" class="headerlink" title="DQL"></a>DQL</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//说实在话 布置的那100道题目是我第二次这么长时间写sql </span></span><br><span class="line"><span class="comment">//感觉sql并不难，关键是得静下心来一步一步分析下来，从会做的开始做，剩下的慢慢都能做的来</span></span><br><span class="line">- <span class="number">1</span>.DQL关键字优先级</span><br><span class="line">select &gt; from &gt; where &gt; group by &gt; having &gt; order by &gt; limit</span><br><span class="line">join:笛卡尔积 类似于两个嵌套循环，表中数据两两组合一条数据 </span><br><span class="line">on：关联查询中的条件判断</span><br><span class="line">left join:左表为主表</span><br><span class="line">union:合并表（匹配不上的字段直接删除）</span><br><span class="line">group by:将符合条件的数据合并成一组 实际上用键值对存储最多一组的分组条件和的个数</span><br><span class="line">where:查询中的条件判断</span><br><span class="line">having:查询后的结果的条件判断</span><br><span class="line">order by:排序 asc(默认：升序，随着序列的上升而上升) desc 降序</span><br><span class="line">limit:限制 limit <span class="number">4</span>,<span class="number">3</span> 从第<span class="number">5</span>行开始截取三条数据</span><br></pre></td></tr></table></figure>
 <h3 id="函数部分"><a href="#函数部分" class="headerlink" title="函数部分"></a>函数部分</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//聚合函数什么的不想写了，想偷会懒</span></span><br><span class="line"><span class="comment">//其他的函数也不太熟 这里就先搁置了</span></span><br></pre></td></tr></table></figure>
+<h3 id="sql优化"><a href="#sql优化" class="headerlink" title="sql优化"></a>sql优化</h3><h4 id="尽量少触发全表扫描如（就这些吧，太多了也记不住）："><a href="#尽量少触发全表扫描如（就这些吧，太多了也记不住）：" class="headerlink" title="尽量少触发全表扫描如（就这些吧，太多了也记不住）："></a>尽量少触发全表扫描如（就这些吧，太多了也记不住）：</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">1.where 子句中使用!=或&lt;&gt;操作符 </span><br><span class="line">2.where 及 order by 涉及的列上建立索引 </span><br><span class="line">3.在 where 子句中对字段进行 null 值判断 </span><br><span class="line">4.在 where 子句中使用 or 来连接条件</span><br><span class="line">5.下面的查询也将导致全表扫描：(不能前置百分号) </span><br><span class="line">6.in 和 not in 也要慎用，否则会导致全表扫描 </span><br><span class="line">7.在 where 子句中使用参数</span><br><span class="line"> 可以用 <span class="keyword">select</span> <span class="keyword">id</span> <span class="keyword">from</span> t <span class="keyword">with</span>(<span class="keyword">index</span>(索引名)) <span class="keyword">where</span> <span class="keyword">num</span>=@<span class="keyword">num</span>(强制使用索引)</span><br><span class="line"><span class="number">8.</span>在<span class="keyword">where</span>子句中对字段进行函数操作</span><br></pre></td></tr></table></figure>
 
           
         
@@ -585,7 +713,7 @@
       
         
           
-            <h3 id="technical-bolg-or-life-bolg"><a href="#technical-bolg-or-life-bolg" class="headerlink" title="technical bolg or life bolg"></a>technical bolg or life bolg</h3><pre><code>拖了好久，说了要写博客，一路磕磕绊绊，终于要开始了。不知道能否坚持下去。
+            <h2 id="technical-bolg-or-life-bolg"><a href="#technical-bolg-or-life-bolg" class="headerlink" title="technical bolg or life bolg"></a>technical bolg or life bolg</h2><pre><code>拖了好久，说了要写博客，一路磕磕绊绊，终于要开始了。不知道能否坚持下去。
 </code></pre><p>不说了，说多了做不到都是空的，骗得了自己骗不了别人。</p>
 
           
@@ -668,7 +796,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
