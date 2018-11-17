@@ -328,7 +328,7 @@ kbd {
   font-family: inherit;
   background-image: -webkit-linear-gradient(top, #eee, #fff, #eee);
   padding: 0.1em 0.3em;
-  white-space: nowrap;
+  white-space: pre-wrap;
 }
 .text-left {
   text-align: left;
@@ -1822,7 +1822,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffffe7;
+  background: #96ff85;
 }
 .links-of-blogroll {
   font-size: 13px;
