@@ -79,17 +79,17 @@
 
 
 
-<meta name="description" content="you never konw what&apos;s the next">
+<meta name="description" content="大数据随着时代技术的发展，数据量在不断的增大。《大数据时代》中大数据不能再用随机分析（抽样调查）的方法来处理数据。 mapreduce过程1.读取hdfs中的文件。每一行解析成一个&amp;lt;k,v&amp;gt; 1 (偏移量，输入的值)1 2.重写map(),生成新的&amp;lt;k,v&amp;gt; 2 3.partition 分区 默认分为一个区 可以重写分区 按key分区 4.排序  （自定义排序类） 5.对分">
 <meta property="og:type" content="article">
 <meta property="og:title" content="大数据面试知识点">
 <meta property="og:url" content="http://justcodingwc.top/2018/11/14/大数据面试知识点/index.html">
 <meta property="og:site_name" content="codingwc&#39;s blog">
-<meta property="og:description" content="you never konw what&apos;s the next">
+<meta property="og:description" content="大数据随着时代技术的发展，数据量在不断的增大。《大数据时代》中大数据不能再用随机分析（抽样调查）的方法来处理数据。 mapreduce过程1.读取hdfs中的文件。每一行解析成一个&amp;lt;k,v&amp;gt; 1 (偏移量，输入的值)1 2.重写map(),生成新的&amp;lt;k,v&amp;gt; 2 3.partition 分区 默认分为一个区 可以重写分区 按key分区 4.排序  （自定义排序类） 5.对分">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-14T01:03:42.262Z">
+<meta property="og:updated_time" content="2018-11-19T12:44:52.866Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="大数据面试知识点">
-<meta name="twitter:description" content="you never konw what&apos;s the next">
+<meta name="twitter:description" content="大数据随着时代技术的发展，数据量在不断的增大。《大数据时代》中大数据不能再用随机分析（抽样调查）的方法来处理数据。 mapreduce过程1.读取hdfs中的文件。每一行解析成一个&amp;lt;k,v&amp;gt; 1 (偏移量，输入的值)1 2.重写map(),生成新的&amp;lt;k,v&amp;gt; 2 3.partition 分区 默认分为一个区 可以重写分区 按key分区 4.排序  （自定义排序类） 5.对分">
 
 
 
@@ -329,7 +329,32 @@
       
 
       
-        
+        <h3 id="大数据"><a href="#大数据" class="headerlink" title="大数据"></a>大数据</h3><p>随着时代技术的发展，数据量在不断的增大。《大数据时代》中大数据不能再用随机分析（抽样调查）的方法来处理数据。</p>
+<h3 id="mapreduce过程"><a href="#mapreduce过程" class="headerlink" title="mapreduce过程"></a>mapreduce过程</h3><p>1.读取hdfs中的文件。每一行解析成一个&lt;k,v&gt; 1 (偏移量，输入的值)1</p>
+<p>2.重写map(),生成新的&lt;k,v&gt; 2</p>
+<p>3.partition 分区 默认分为一个区 可以重写分区 按key分区</p>
+<p>4.排序  （自定义排序类）</p>
+<p>5.对分组排序后的数据进行规约，其实就是进行一次小合并，减少数据传输量 （比如说累加或是求topN就是在这进行的）</p>
+<p>6.shuffle:</p>
+<p>map端shuffle：多个inputSplit获取到自己的mapTask,map任务结束后产生k2,每个map有个环形内存缓冲区，默认大小100M,溢写比为0.8，达到阈值后将文件写道磁盘中。缓存的好处减少IO开销，提高合并排序速度。在编写map时少使用内存，尽量给shuffle过程预留时间，这个阶段最耗费时间。</p>
+<p>reduce阶段：通过http方式得到文本，每个map的结束时间不一致。datanode可以通过namenode获取其信息。如果形成多个磁盘文件会进行合并最后一次合并结果作为reduce的输入而不是写到磁盘。</p>
+<p>7.对多个map进行合并，相同key的reduce发送到一起，产生新的&lt;k,v&gt; 3</p>
+<p>8将输出输出到hdfs</p>
+<h3 id="spark-streaming过程"><a href="#spark-streaming过程" class="headerlink" title="spark streaming过程"></a>spark streaming过程</h3><p>spark程序是使用一个spark应用实例一次性对一批历史数据进行处理，spark streaming是将持续不断输入的数据流转换成多个batch分片，使用一批spark应用实例进行处理。 </p>
+<ol>
+<li>一个静态的 RDD DAG 的模板，来表示处理逻辑；</li>
+<li>一个动态的工作控制器，将连续的 streaming data 切分数据片段，并按照模板复制出新的 RDD ；</li>
+<li>DAG 的实例，对数据片段进行处理；</li>
+<li>Receiver进行原始数据的产生和导入；Receiver将接收到的数据合并为数据块并存到内存或硬盘中，供后续batch RDD进行消费；</li>
+<li>对长时运行任务的保障，包括输入数据的失效后的重构，处理任务的失败后的重调。</li>
+</ol>
+<p>Executor以线程的方式执行每一个task。</p>
+<p>DAG调度的过程中，根据shuffle划分stage</p>
+<p>未优化的shuffle阶段，shuffleMapTask和reduceTask中会产生大量的block file </p>
+<p>hashshuffle</p>
+<p>优化后：根据cpu核心数决定Task的并发数量，根据reduceTask创建bucket,bucket决定block file的数量，问题是reduceTask很大怎么办？相当于bucket是聚合了mapTask和reduceTask<br>Sorted-Based Shuffle</p>
+<p>为了缓解Shuffle过程产生文件数过多和Writer缓存开销过大的问题，spark引入了类似于hadoop Map-Reduce的shuffle机制。该机制每一个ShuffleMapTask不会为后续的任务创建单独的文件，而是会将所有的Task结果写入同一个文件，并且对应生成一个索引文件。以前的数据是放在内存缓存中，等到数据完了再刷到磁盘，现在为了减少内存的使用，在内存不够用的时候，可以将输出溢写到磁盘，结束的时候，再将这些不同的文件联合内存的数据一起进行归并，从而减少内存的使用量。一方面文件数量显著减少，另一方面减少Writer缓存所占用的内存大小，而且同时避免GC的风险和频率。</p>
+
       
     </div>
     
@@ -417,8 +442,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -433,7 +467,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -470,6 +504,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#大数据"><span class="nav-number">1.</span> <span class="nav-text">大数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#mapreduce过程"><span class="nav-number">2.</span> <span class="nav-text">mapreduce过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#spark-streaming过程"><span class="nav-number">3.</span> <span class="nav-text">spark streaming过程</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -483,7 +533,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
